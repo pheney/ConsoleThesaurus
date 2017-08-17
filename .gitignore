@@ -1,0 +1,12 @@
+*.suo
+*.exe
+*.sln
+*.user
+*.csproj
+*.xml
+*.pdb
+*.manifest
+*.dll
+bin/*
+obj/*
+packages/*
