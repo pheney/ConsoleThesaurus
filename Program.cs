@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -38,10 +38,10 @@ namespace ConsoleThesaurus
         static string lang = "en";
         static string template = "{protocol}://{endpoint}:{port}/api/{version}/entries/{lang}/{word}";
         
-        static string id = "62e7ee761";
-        static string key = "12e5c078cbd8202e07d6cee6f95efac4e";
-        static string de = "1";
-        
+        static string id = "4a62e7ee76";
+        static string key = "c72e5c078cbd8202e07d6cee6f95efac4e";
+        static string de = "2";
+
         /// <summary>
         /// 2017-8-17
         /// Sample URL: https://od-api.oxforddictionaries.com:443/api/v1/entries/en/ace/synonyms
@@ -67,8 +67,8 @@ namespace ConsoleThesaurus
             //  Build the web request
             WebRequest webRequest = WebRequest.Create(fullurl);
             webRequest.ContentType = "application/json";
-            webRequest.Headers.Add("app_id", id);
-            webRequest.Headers.Add("app_key", key);
+            webRequest.Headers.Add("app_id", decrypt(id, de));
+            webRequest.Headers.Add("app_key", decrypt(key, de));
 
             //  Create an empty response
             WebResponse webResp = null;
@@ -172,6 +172,14 @@ namespace ConsoleThesaurus
                 results.AddUnique(source[i].Value<string>(tokenName));
             }
             return results.ToArray();
+        }
+
+        /// <summary>
+        /// 2017-8-17
+        /// </summary>
+        private static string decrypt(string source, string key)
+        {
+            return source.Substring(int.Parse(key));
         }
     }
 
